@@ -48,9 +48,16 @@ def return_ips():
             for ip_obj in user['ips']:
                 ips.append(ip_obj['ip'])
 
-    ips_out = {'data': ips}
+    output = {
+        "data": [
+                {
+                    "type": "ipRange",
+                    "ranges": ips
+                }
+            ]
+        }
 
-    return Response(json.dumps(ips_out), mimetype='application/json')
+    return Response(json.dumps(output), mimetype='application/json')
 
 @app.route('/new_user')
 def new_user():
