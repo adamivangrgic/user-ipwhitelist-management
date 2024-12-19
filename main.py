@@ -48,14 +48,7 @@ def return_ips():
             for ip_obj in user['ips']:
                 ips.append(ip_obj['ip'])
 
-    output = {
-        "data": [
-                {
-                    "type": "ipRange",
-                    "ranges": ips
-                }
-            ]
-        }
+    output = { "data": { "ipRange": ips } }
 
     return Response(json.dumps(output), mimetype='application/json')
 
