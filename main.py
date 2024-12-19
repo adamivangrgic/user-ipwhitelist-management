@@ -23,9 +23,6 @@ def write_data(data):
     with open(data_file_path, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=4)
 
-
-
-# Function to find the newest IP within the 7 days condition
 def get_newest_ip(ips):
 
     current_time = time.time()
@@ -54,7 +51,7 @@ def return_ips():
     ##
 
     data = open_data()
-    client_ips = []
+    client_ips = {}
 
     for user_key in data['users'].keys():
         user = data['users'][user_key]
