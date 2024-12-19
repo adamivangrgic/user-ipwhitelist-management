@@ -46,7 +46,7 @@ def return_ips():
         if user['enabled']:
             
             for ip_obj in user['ips']:
-                ips.append(ip_obj['ip'])
+                ips.append(ip_obj['ip'] + '/32') # added subnet mask in cidr notation
 
     output = { "data": { "ipRange": ips } }
 
