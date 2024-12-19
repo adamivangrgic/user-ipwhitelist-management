@@ -9,4 +9,4 @@ PERSISTENT_STORAGE = /data by default
 
 ip list endpoint:   http://127.0.0.1:5000/return_ips?pass=<env:ACCESS_PASS> ; pass not required if not in env variables
 new ip endpoint:    http://127.0.0.1:5000/new_ip?ip=<newIP>&username=<user>&userpass=<password>
-new user endpoint:  http://127.0.0.1:5000/new_user?username=<user>&userpass=<password>
+new user endpoint:  http://127.0.0.1:5000/new_user?pass=<env:ACCESS_PASS>&username=<user>&userpass=<password>
