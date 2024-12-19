@@ -24,6 +24,22 @@ def write_data(data):
         json.dump(data, f, ensure_ascii=False, indent=4)
 
 
+
+# Function to find the newest IP within the 7 days condition
+def get_newest_ip(ips):
+
+    current_time = time.time()
+    threshold = 7 * 24 * 60 * 60  # 7 days in seconds
+
+    valid_ips = [ip for ip in ips if current_time - ip['time'] < threshold]
+    
+    if valid_ips:
+        # Return the IP with the newest timestamp
+        newest_ip = max(valid_ips, key=lambda x: x['time'])
+        return newest_ip['ip']
+    return None
+
+
 @app.route('/return_ips')
 def return_ips():
 
@@ -38,17 +54,18 @@ def return_ips():
     ##
 
     data = open_data()
-    ips = []
+    client_ips = []
 
     for user_key in data['users'].keys():
         user = data['users'][user_key]
 
         if user['enabled']:
-            
-            for ip_obj in user['ips']:
-                ips.append(ip_obj['ip'] + '/32') # added subnet mask in cidr notation
+            ip = get_newest_ip(user['ips'])
 
-    output = { "data": { "ipRange": ips } }
+            if ip:
+                client_ips[user_key] = ip + '/32'
+
+    output = { "data": { "ipRange": client_ips } }
 
     return Response(json.dumps(output), mimetype='application/json')
 
