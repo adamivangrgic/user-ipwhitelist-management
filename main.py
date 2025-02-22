@@ -43,7 +43,7 @@ def return_ips():
     ## auth
 
     if access_pass:
-        submitted_pass = request.args.get('pass')
+        submitted_pass = request.values.get('pass')
         
         if access_pass != submitted_pass:
             return Response('Forbidden', status=403)
@@ -72,15 +72,15 @@ def new_user():
     ## auth
 
     if access_pass:
-        submitted_pass = request.args.get('pass')
+        submitted_pass = request.values.get('pass')
         
         if access_pass != submitted_pass:
             return Response('Forbidden', status=403)
 
     ##
 
-    username = request.args.get('username')
-    password = request.args.get('userpass')
+    username = request.values.get('username')
+    password = request.values.get('userpass')
 
     # 'username': {'userpass': <>, 'enabled': True, 'ips': []}
 
@@ -94,10 +94,10 @@ def new_user():
 
 @app.route('/new_ip', methods=['GET', 'POST'])
 def new_ip():
-    new_ip = request.args.get('ip')
+    new_ip = request.values.get('ip')
 
-    username = request.args.get('username')
-    password = request.args.get('userpass')
+    username = request.values.get('username')
+    password = request.values.get('userpass')
 
     ## auth
 
