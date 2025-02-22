@@ -37,7 +37,7 @@ def get_newest_ip(ips):
     return None
 
 
-@app.route('/return_ips', methods=['POST'])
+@app.route('/return_ips', methods=['GET', 'POST'])
 def return_ips():
 
     ## auth
@@ -66,7 +66,7 @@ def return_ips():
 
     return Response(json.dumps(output), mimetype='application/json')
 
-@app.route('/new_user', methods=['POST'])
+@app.route('/new_user', methods=['GET', 'POST'])
 def new_user():
 
     ## auth
@@ -92,7 +92,7 @@ def new_user():
 
     return Response('OK')
 
-@app.route('/new_ip', methods=['POST'])
+@app.route('/new_ip', methods=['GET', 'POST'])
 def new_ip():
     new_ip = request.args.get('ip')
 
